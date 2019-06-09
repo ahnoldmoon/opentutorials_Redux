@@ -14,7 +14,7 @@
                 <div id="green"></div>
                 <script>
                     function reducer(state, action){
-                        console.log(state, action);
+                        
                         if(state === undefined){
                             return {color:'yellow'}
                         }
@@ -22,9 +22,13 @@
                         if(action.type === 'CHANGE_COLOR'){
                             newState = Object.assign({}, state, {color:action.color});
                         }
+                        console.log(action.type, action, state, newState);
                         return newState;
                     }
-                    var store = Redux.createStore(reducer);
+                    var store = Redux.createStore(
+                        reducer,
+                        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+                    );
                     console.log(store.getState());
                     function red(){
                         var state = store.getState()
